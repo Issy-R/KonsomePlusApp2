@@ -18,15 +18,24 @@ export default function YoutubeList(props) {
           uri,
         }}
       />
-      <Text
-        style={styles.title}
-        numberOfLines={2}
-      >
-        {title}
-      </Text>
-      <View style={styles.underContainer}>
-        <Text style={styles.underText}>{publishedAt}</Text>
-        <Text style={styles.underText}>{ch}</Text>
+      <View style={styles.footerContainer}>
+        <Image
+          style={styles.chIcon}
+          source={{ uri: 'https://yt3.ggpht.com/ytc/AAUvwngSW72PIHG0Ou4vJmJs9AoJEBppVxq4pxOUGxaQ=s88-c-k-c0x00ffffff-no-rj' }}
+        />
+        <View style={styles.footerRight}>
+          <Text
+            style={styles.title}
+            numberOfLines={2}
+          >
+            {title}
+          </Text>
+          <View style={styles.underContainer}>
+            <Text style={styles.underText}>{ch}</Text>
+            <Text style={styles.underText}>{publishedAt}</Text>
+          </View>
+        </View>
+
       </View>
     </View>
   );
@@ -60,17 +69,31 @@ const styles = StyleSheet.create({
     height: (width - 48) * 0.5625,
     backgroundColor: 'blue',
   },
-  title: {
+  footerContainer: {
     width: width - 48,
-    fontSize: 24,
-    lineHeight: 32,
+    flexDirection: 'row',
+    paddingVertical: 8,
+    // backgroundColor: 'red',
+  },
+  chIcon: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+  },
+  footerRight: {
+    width: width - 48 - 60,
+    // backgroundColor: 'blue',
+    paddingLeft: 8,
+  },
+  title: {
+    fontSize: 20,
+    lineHeight: 24,
     fontWeight: 'bold',
-    alignSelf: 'flex-start',
+    // alignSelf: 'flex-start',
     paddingTop: 8,
     // backgroundColor: 'red',
   },
   underContainer: {
-    width: width - 48,
     justifyContent: 'space-between',
     flexDirection: 'row',
     // backgroundColor: 'green',

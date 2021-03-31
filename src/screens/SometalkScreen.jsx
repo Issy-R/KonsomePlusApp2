@@ -4,11 +4,11 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import YoutubeList from '../components/YoutubeList';
-import { youtubeApiKey } from '../../env';
+import { youtubeApiKey2 } from '../../env';
 
 export default function SometalkScreen() {
   const [articles, setArticles] = useState([]);
-  const URL = `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=5&playlistId=PLHFvtaNlqGSsxmuj6SMLs5CblJS895emh&key=${youtubeApiKey}&fields=items/snippet/title,items/snippet/thumbnails/high/url,items/snippet/publishedAt,items/snippet/resourceId/videoId`;
+  const URL = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCwGqHJi5UTWw2cIeYRum-vA&maxResults=10&order=date&q=ソメトーーク&key=${youtubeApiKey2}&fields=items/snippet/title,items/snippet/thumbnails/high/url,items/snippet/publishedAt,items/id/videoId`;
 
   useEffect(() => {
     fetchArticles();
@@ -39,5 +39,3 @@ export default function SometalkScreen() {
     />
   );
 }
-
-// https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=5&playlistId=PLHFvtaNlqGSsxmuj6SMLs5CblJS895emh&order=viewCount&key=AIzaSyDxTGGGIS6pmPUv79YiUJ_tJTYu2VGZtfM&fields=items/snippet/title,items/snippet/thumbnails/high/url,items/snippet/publishedAt,items/snippet/resourceId/videoId
