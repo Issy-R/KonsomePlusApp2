@@ -6,7 +6,8 @@ import axios from 'axios';
 import YoutubeList from '../components/YoutubeList';
 import { youtubeApiKey } from '../../env';
 
-export default function SometalkScreen() {
+export default function SometalkScreen(props) {
+  const { navigation } = props;
   const [articles, setArticles] = useState([]);
   const URL = `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=5&playlistId=PLHFvtaNlqGSt104p3U2RbTxDqOxTNw8uz&key=${youtubeApiKey}&fields=items/snippet/title,items/snippet/thumbnails/high/url,items/snippet/publishedAt,items/snippet/resourceId/videoId`;
 
@@ -33,17 +34,12 @@ export default function SometalkScreen() {
           publishedAt={item.snippet.publishedAt}
           uri={item.snippet.thumbnails.high.url}
           ch="KONSOME＋ch."
+          onPress={() => {
+            navigation.navigate('YouTube', { articleU: item }, { articleS: null });
+          }}
         />
       )}
       keyExtractor={(item, index) => index.toString()}
     />
   );
 }
-
-// https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=5&playlistId=PLHFvtaNlqGSsxmuj6SMLs5CblJS895emh&order=viewCount&key=AIzaSyDxTGGGIS6pmPUv79YiUJ_tJTYu2VGZtfM&fields=items/snippet/title,items/snippet/thumbnails/high/url,items/snippet/publishedAt,items/snippet/resourceId/videoId
-
-// `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=5&playlistId=PLHFvtaNlqGSsxmuj6SMLs5CblJS895emh&key=${youtubeApiKey}&fields=items/snippet/title,items/snippet/thumbnails/high/url,items/snippet/publishedAt,items/snippet/resourceId/videoId`;
-
-// https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCwGqHJi5UTWw2cIeYRum-vA&maxResults=10&order=date&q=ソメトーーク&key=AIzaSyBYB07AAPZliO1numI8Eluc5mPIlUVMG3Y
-
-// GET https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=5&playlistId=PLHFvtaNlqGSt104p3U2RbTxDqOxTNw8uz&key=AIzaSyBYB07AAPZliO1numI8Eluc5mPIlUVMG3Y

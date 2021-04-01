@@ -6,7 +6,8 @@ import axios from 'axios';
 import YoutubeList from '../components/YoutubeList';
 import { youtubeApiKey2 } from '../../env';
 
-export default function SometalkScreen() {
+export default function SometalkScreen(props) {
+  const { navigation } = props;
   const [articles, setArticles] = useState([]);
   const URL = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCwGqHJi5UTWw2cIeYRum-vA&maxResults=10&order=date&q=ソメトーーク&key=${youtubeApiKey2}&fields=items/snippet/title,items/snippet/thumbnails/high/url,items/snippet/publishedAt,items/id/videoId`;
 
@@ -33,6 +34,9 @@ export default function SometalkScreen() {
           publishedAt={item.snippet.publishedAt}
           uri={item.snippet.thumbnails.high.url}
           ch="KONSOME＋ch."
+          onPress={() => {
+            navigation.navigate('YouTube', { articleS: item }, { articleU: null });
+          }}
         />
       )}
       keyExtractor={(item, index) => index.toString()}

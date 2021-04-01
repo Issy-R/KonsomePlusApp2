@@ -1,14 +1,17 @@
 import React from 'react';
-import { View, Text, SafeAreaView } from 'react-native';
 import { WebView } from 'react-native-webview';
 
-export default function YoutubeWebScreen() {
+export default function YoutubeWebScreen({ route }) {
+  const { articleS, articleU } = route.params;
+  console.log(articleS);
+  console.log(articleU);
+  const videoId = articleS === undefined
+    ? articleU.snippet.resourceId.videoId : articleS.id.videoId;
+  const uri = `https://www.youtube.com/watch?v=${videoId}`;
   return (
-    <SafeAreaView>
-      <WebView source={{ uri: 'https://www.yahoo.co.jp/' }} />
-    </SafeAreaView>
-    // <View>
-    //   <Text>こんにちわ</Text>
-    // </View>
+    <WebView
+      source={{ uri }}
+      style={{ marginTop: 20 }}
+    />
   );
 }

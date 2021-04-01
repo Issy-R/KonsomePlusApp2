@@ -1,45 +1,55 @@
 import React from 'react';
 import {
-  Text, StyleSheet, View, Dimensions, Image,
+  Text, StyleSheet, View, Dimensions, Image, TouchableOpacity,
 } from 'react-native';
-import { string } from 'prop-types';
+import { func, string } from 'prop-types';
 
 const { width } = Dimensions.get('window');
 
 export default function YoutubeList(props) {
   const {
-    title, publishedAt, uri, ch,
+    title, publishedAt, uri, ch, onPress,
   } = props;
   return (
-    <View style={styles.listContainer}>
-      <Image
-        style={styles.thumbnailContainer}
-        source={{
-          uri,
-        }}
-      />
-      <View style={styles.footerContainer}>
+    <TouchableOpacity onPress={onPress}>
+      <View style={styles.listContainer}>
         <Image
-          style={styles.chIcon}
-          source={{ uri: 'https://yt3.ggpht.com/ytc/AAUvwngSW72PIHG0Ou4vJmJs9AoJEBppVxq4pxOUGxaQ=s88-c-k-c0x00ffffff-no-rj' }}
+          style={styles.thumbnailContainer}
+          source={{
+            uri,
+          }}
         />
-        <View style={styles.footerRight}>
-          <Text
-            style={styles.title}
-            numberOfLines={2}
-          >
-            {title}
-          </Text>
-          <View style={styles.underContainer}>
-            <Text style={styles.underText}>{ch}</Text>
-            <Text style={styles.underText}>{publishedAt}</Text>
+        <View style={styles.footerContainer}>
+          <Image
+            style={styles.chIcon}
+            source={{ uri: 'https://yt3.ggpht.com/ytc/AAUvwngSW72PIHG0Ou4vJmJs9AoJEBppVxq4pxOUGxaQ=s88-c-k-c0x00ffffff-no-rj' }}
+          />
+          <View style={styles.footerRight}>
+            <Text
+              style={styles.title}
+              numberOfLines={2}
+            >
+              {title}
+            </Text>
+            <View style={styles.underContainer}>
+              <Text style={styles.underText}>{ch}</Text>
+              <Text style={styles.underText}>{publishedAt}</Text>
+            </View>
           </View>
-        </View>
 
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
+
+YoutubeList.propTypes = {
+  onPress: func,
+};
+
+YoutubeList.defaultProps = {
+  onPress: null,
+};
 
 YoutubeList.propTypes = {
   title: string,
